@@ -10,6 +10,8 @@ git clone https://github.com/ptitSeb/box86
 
 sh -c "cd box86 && cmake .. -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo ~/box86 && make && make install"
 
+apt install wget
+
 wget https://twisteros.com/wine.tgz
 
 tar -xvzf wine.tgz
