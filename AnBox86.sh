@@ -95,7 +95,7 @@ function run_InjectSecondStageInstaller() # Creates a script that will set up Ub
 			echo >> launch_wine.sh "#!/bin/bash"
 			echo >> launch_wine.sh ""
 			echo >> launch_wine.sh "export DISPLAY=localhost:0"
-			echo >> launch_wine.sh "Xephyr :1 -fullscreen &"
+			echo >> launch_wine.sh "sudo Xephyr :1 -fullscreen &"
 			echo >> launch_wine.sh "DISPLAY=:1 box86 ~/wine/bin/wine explorer /desktop=wine,1280x720 explorer"
 			sudo chmod +x launch_wine.sh
 			
