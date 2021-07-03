@@ -4,9 +4,15 @@ A set of scripts to install box86 and wine on a termux proot for arm64 devices.
 
 # Instructions
 
-1- Bash AnBox86a.sh in termux
+1- Install Termux
 
-2- Bash Anbox86b.sh in the proot
+2- Copy/paste these commands into Termux
+```bash
+pkg update -y; pkg install wget -y  < "/dev/null"
+
+wget https://raw.githubusercontent.com/lowspecman420/AnBox86/main/AnBox86.sh && \
+    bash AnBox86.sh
+```
 
 # Projects used
 
