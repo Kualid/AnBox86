@@ -23,3 +23,10 @@ Box86 by ptitseb https://github.com/ptitSeb/box86
 Wine https://www.winehq.org
 
 Termux https://github.com/termux/termux-app
+
+
+# Huge thanks to
+
+https://youtube.com/c/WMCBTech
+
+https://github.com/WheezyE
