@@ -35,6 +35,10 @@ function run_Main()
 	# Create a script to log into PRoot as the 'user' account (which we will create later)
 	echo >> launch_ubuntu.sh "#!/bin/bash"
 	echo >> launch_ubuntu.sh ""
+        echo >> launch_ubuntu.sh "export PATH=$HOME/proot-static/bin:$PATH"
+        echo >> launch_ubuntu.sh ""
+        echo >> launch_ubuntu.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
+        echo >> launch_ubuntu.sh ""
 	echo >> launch_ubuntu.sh "proot-distro login --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
 	chmod +x launch_ubuntu.sh
 	
