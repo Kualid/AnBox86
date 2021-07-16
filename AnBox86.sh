@@ -29,16 +29,13 @@ function run_Main()
 	apt install proot-distro git -y
 	linux32 proot-distro install ubuntu-20.04
 	git clone https://github.com/ZhymabekRoman/proot-static # Use a 32bit PRoot instead of 64bit
-	export PATH=$HOME/proot-static/bin:$PATH && echo >> ~/.bashrc "export PATH=$HOME/proot-static/bin:$PATH"
-	export PROOT_LOADER=$HOME/proot-static/bin/loader && echo >> ~/.bashrc "export PROOT_LOADER=$HOME/proot-static/bin/loader"
 	
 	# Create a script to log into PRoot as the 'user' account (which we will create later)
 	echo >> launch_ubuntu.sh "#!/bin/bash"
 	echo >> launch_ubuntu.sh ""
-        echo >> launch_ubuntu.sh "export PATH=$HOME/proot-static/bin:$PATH"
-        echo >> launch_ubuntu.sh ""
-        echo >> launch_ubuntu.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
-        echo >> launch_ubuntu.sh ""
+	echo >> launch_ubuntu.sh "export PATH=$HOME/proot-static/bin:$PATH"
+	echo >> launch_ubuntu.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
+	echo >> launch_ubuntu.sh ""
 	echo >> launch_ubuntu.sh "proot-distro login --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
 	chmod +x launch_ubuntu.sh
 	
@@ -48,6 +45,8 @@ function run_Main()
 	
 	# Log into PRoot (which will then launch the 'second stage' installer)
 	echo -e "\nUbunutu PRoot guest system installed. Launching PRoot to continue the installation. . ."
+	export PATH=$HOME/proot-static/bin:$PATH
+	export PROOT_LOADER=$HOME/proot-static/bin/loader
 	proot-distro login --isolated ubuntu-20.04 # Log into the Ubuntu PRoot as 'root'.
 }
 
