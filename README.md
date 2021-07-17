@@ -4,7 +4,7 @@ A set of scripts to install box86 and wine on a termux proot for arm64 devices.
 
 # Instructions
 
-1- Install Termux (FROM F-DROID)
+1- Install Termux (FROM F-DROID) https://f-droid.org/en/packages/com.termux/
 
 2- Copy/paste these commands into Termux
 ```bash
