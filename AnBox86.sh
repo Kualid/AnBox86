@@ -31,18 +31,18 @@ function run_Main()
 	git clone https://github.com/ZhymabekRoman/proot-static # Use a 32bit PRoot instead of 64bit
 	
 	# Create a script to start XServerXSDL and log into PRoot as the 'user' account (which we will create later)
-	echo >> AnBox86.sh "#!/bin/bash"
-	echo >> AnBox86.sh ""
-	echo >> AnBox86.sh "am start --user 0 -n x.org.server/x.org.server.RunFromOtherApp"
-	echo >> AnBox86.sh ""
-	echo >> AnBox86.sh "sleep 7s"
-	echo >> AnBox86.sh ""
-	echo >> AnBox86.sh "export PATH=$HOME/proot-static/bin:$PATH"
-	echo >> AnBox86.sh ""
-	echo >> AnBox86.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
-	echo >> AnBox86.sh ""
-	echo >> AnBox86.sh "proot-distro login --bind /sdcard --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
-	chmod +x AnBox86.sh
+	echo >> Start_AnBox86.sh "#!/bin/bash"
+	echo >> Start_AnBox86.sh ""
+	echo >> Start_AnBox86.sh "am start --user 0 -n x.org.server/x.org.server.RunFromOtherApp"
+	echo >> Start_AnBox86.sh ""
+	echo >> Start_AnBox86.sh "sleep 7s"
+	echo >> Start_AnBox86.sh ""
+	echo >> Start_AnBox86.sh "export PATH=$HOME/proot-static/bin:$PATH"
+	echo >> Start_AnBox86.sh ""
+	echo >> Start_AnBox86.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
+	echo >> Start_AnBox86.sh ""
+	echo >> Start_AnBox86.sh "proot-distro login --bind /sdcard --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
+	chmod +x Start_AnBox86.sh
 	
 	# Create a script to log into PRoot as the 'user' account (which we will create later)
 	echo >> launch_ubuntu.sh "#!/bin/bash"
@@ -129,7 +129,7 @@ function run_InjectSecondStageInstaller()
 			sudo mv winetricks /usr/local/bin
 			
 			echo -e "\nAnBox86 installation complete."
-			echo " - From Termux, you can use AnBox86.sh to start Box86 and Wine."
+			echo " - From Termux, you can use Start_AnBox86.sh to start Box86 and Wine."
 			echo " - From Termux, you can also use launch_ubuntu.sh to login to user account"
 			echo "    (we are currently inside Ubuntu PRoot in a user account)"
 			echo " - Launch x86 programs from inside PRoot with 'wine YourWindowsProgram.exe' or 'box86 YourLinuxProgram'."
