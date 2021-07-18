@@ -30,13 +30,28 @@ function run_Main()
 	linux32 proot-distro install ubuntu-20.04
 	git clone https://github.com/ZhymabekRoman/proot-static # Use a 32bit PRoot instead of 64bit
 	
+	# Create a script to start XServerXSDL and log into PRoot as the 'user' account (which we will create later)
+	echo >> AnBox86.sh "#!/bin/bash"
+	echo >> AnBox86.sh ""
+	echo >> AnBox86.sh "am start --user 0 -n x.org.server/x.org.server.RunFromOtherApp"
+	echo >> AnBox86.sh ""
+	echo >> AnBox86.sh "sleep 7s"
+	echo >> AnBox86.sh ""
+	echo >> AnBox86.sh "export PATH=$HOME/proot-static/bin:$PATH"
+	echo >> AnBox86.sh ""
+	echo >> AnBox86.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
+	echo >> AnBox86.sh ""
+	echo >> AnBox86.sh "proot-distro login --bind /sdcard --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
+	chmod +x AnBox86.sh
+	
 	# Create a script to log into PRoot as the 'user' account (which we will create later)
 	echo >> launch_ubuntu.sh "#!/bin/bash"
 	echo >> launch_ubuntu.sh ""
 	echo >> launch_ubuntu.sh "export PATH=$HOME/proot-static/bin:$PATH"
+	echo >> launch_ubuntu.sh ""
 	echo >> launch_ubuntu.sh "export PROOT_LOADER=$HOME/proot-static/bin/loader"
 	echo >> launch_ubuntu.sh ""
-	echo >> launch_ubuntu.sh "proot-distro login --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
+	echo >> launch_ubuntu.sh "proot-distro login --bind /sdcard --isolated ubuntu-20.04 -- su - user" # '--isolated' avoids program conflicts between Termux & PRoot (credits: Mipster)
 	chmod +x launch_ubuntu.sh
 	
 	# Inject a 'second stage' installer script into Ubuntu
@@ -96,6 +111,10 @@ function run_InjectSecondStageInstaller()
 			echo >> ~/.bashrc "export DISPLAY=localhost:0"
 			echo >> ~/.bashrc "sudo Xephyr :1 -noreset -fullscreen &"
 			
+			# Automatically start Box86 and Wine when the user logs in
+			echo >> ~/.bashrc "# start Box86 and Wine"
+			echo >> ~/.bashrc "DISPLAY=:1 box86 ~/wine/bin/wine explorer /desktop=wine,1280x720 explorer"
+			
 			# Make scripts and symlinks to transparently run wine with box86 (since we don't have binfmt_misc available)
 			echo -e '#!/bin/bash'"\nDISPLAY=:1 setarch linux32 -L box86 $HOME/wine/bin/wine" '"$@"' | sudo tee -a /usr/local/bin/wine >/dev/null
 			echo -e '#!/bin/bash'"\nbox86 $HOME/wine/bin/wineserver" '"$@"' | sudo tee -a /usr/local/bin/wineserver >/dev/null
@@ -110,7 +129,8 @@ function run_InjectSecondStageInstaller()
 			sudo mv winetricks /usr/local/bin
 			
 			echo -e "\nAnBox86 installation complete."
-			echo " - From Termux, you can use launch_ubuntu.sh to start Ubuntu PRoot."
+			echo " - From Termux, you can use AnBox86.sh to start Box86 and Wine."
+			echo " - From Termux, you can also use launch_ubuntu.sh to login to user account"
 			echo "    (we are currently inside Ubuntu PRoot in a user account)"
 			echo " - Launch x86 programs from inside PRoot with 'wine YourWindowsProgram.exe' or 'box86 YourLinuxProgram'."
 			echo "    (don't forget to use the BOX86_NOBANNER=1 environment variable when launching winetricks)"
