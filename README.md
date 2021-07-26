@@ -1,6 +1,6 @@
 # Anbox86
 
-A set of scripts to install box86 and wine on a termux proot for arm64 devices.
+A script to install box86 and wine on a termux proot for arm64 devices.
 
 # Instructions
 
