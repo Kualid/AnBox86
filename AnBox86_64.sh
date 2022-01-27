@@ -13,7 +13,7 @@ function run_Main()
 {
 	rm AnBox86_64.sh 2>/dev/null # self-destruct (since this script should only be run once)
 	
-  # Enable left & right keys in Termux (optional) - https://www.learntermux.tech/2020/01/how-to-enable-extra-keys-in-termux.html
+	# Enable left & right keys in Termux (optional) - https://www.learntermux.tech/2020/01/how-to-enable-extra-keys-in-termux.html
 	mkdir $HOME/.termux/ 2>/dev/null
 	echo "extra-keys = [['ESC','/','-','HOME','UP','END'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT']]" >> $HOME/.termux/termux.properties
 	termux-reload-settings
